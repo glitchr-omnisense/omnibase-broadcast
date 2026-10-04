@@ -29,6 +29,7 @@ title does not name them.
 | `Artist "Ta Main" / "Toi + Moi" (2026)` | a medley: one song, `Ta Main / Toi + Moi` |
 | `Artist "Song" (Inédit à la TV) (2026)` | a note, not an original artist (`notes`) |
 | `Artist "Song" (1993` | a bracket left open |
+| `A / B "Caravane (2025)` | a quote left open: closed before the brackets |
 | `Artist « Song » (2010)`, `“Song”` | any quotes |
 | `Interview A / B (2024)`, `Interview et portrait A (1993)` | an interview, its artists |
 | `Taratata Extra : Artist "Song" (2024)` | a bonus, with its song |

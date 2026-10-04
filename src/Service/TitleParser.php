@@ -16,7 +16,7 @@ use Base\Broadcast\Model\ParsedTitle;
  * "Chanson" (2024)` (a bonus, with its song), a medley (`"Ta Main" / "Toi
  * + Moi"`), brackets inside a title (`"(Sittin' On) The Dock Of The Bay"`),
  * a note that is no artist (`(Inédit à la TV)`), a bracket left open
- * (`(1993`).
+ * (`(1993`), a quote left open (`"Caravane (2025)`).
  *
  * The section the film is filed under (Live, Interview, Extra, Backstage,
  * Teaser...) says its kind. A live whose title has no song in quotes is
@@ -56,6 +56,10 @@ class TitleParser
         $extra = (bool) preg_match('/^Taratata Extra\s*:\s*/iu', $text, $m);
         if ($extra) {
             $text = mb_substr($text, mb_strlen($m[0]));
+        }
+        // A quote opened and never closed ("Caravane (2025)): closed before the brackets that follow.
+        if (1 === substr_count($text, '"') && preg_match('/^([^"]+?)\s*"([^"()]+?)\s*((?:\([^()]*\)\s*)*)$/u', $text, $m)) {
+            $text = $m[1].' "'.$m[2].'" '.$m[3];
         }
         // Artists, then the song between the first quote and the last one, then what follows in brackets.
         if ((Performance::LIVE === $kind || $extra) && preg_match('/^(?<artists>[^"]+?)\s*"(?<song>.+)"\s*(?<rest>(?:\([^()]*\)\s*)*)$/u', $text, $m)) {
