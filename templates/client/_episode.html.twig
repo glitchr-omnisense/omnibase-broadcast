@@ -1,0 +1,11 @@
+{% trans_default_domain 'broadcast' %}
+<article class="video-card broadcast-episode-card">
+    <a class="video-card-poster" href="{{ path('broadcast_episode', {number: episode.number}) }}" tabindex="-1" aria-hidden="true">
+        {% if episode.image %}<img src="{{ episode.image }}" alt="" loading="lazy" decoding="async">{% else %}<span class="video-card-blank"></span>{% endif %}
+        <span class="video-card-time">n°{{ episode.number }}</span>
+    </a>
+    <div class="video-card-text">
+        <h3 class="video-card-title"><a href="{{ path('broadcast_episode', {number: episode.number}) }}">{{ episode.airedAt ? episode.airedAt|format_date('long') : 'n°' ~ episode.number }}</a></h3>
+        <p class="video-card-meta">{{ episode.performers|map(p => p.name)|slice(0, 6)|join(', ') }}{{ episode.performers|length > 6 ? '…' }}</p>
+    </div>
+</article>

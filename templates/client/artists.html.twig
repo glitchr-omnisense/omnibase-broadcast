@@ -1,0 +1,15 @@
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ 'artists.title'|trans }}{% endblock %}
+{% block content %}
+<div class="broadcast">
+    <header class="video-page-head"><h1>{{ 'artists.title'|trans }}</h1></header>
+    <nav class="broadcast-letters">{% for letter in letters|keys %}<a href="#lettre-{{ letter == '#' ? '0' : letter }}">{{ letter }}</a>{% endfor %}</nav>
+    {% for letter, list in letters %}
+    <section class="broadcast-letter" id="lettre-{{ letter == '#' ? '0' : letter }}">
+        <h2>{{ letter }}</h2>
+        <ul>{% for profile in list %}<li><a href="{{ path('broadcast_artist', {slug: profile.slug}) }}">{{ profile.name }}</a></li>{% endfor %}</ul>
+    </section>
+    {% else %}<p class="video-empty">{{ 'artists.none'|trans }}</p>{% endfor %}
+</div>
+{% endblock %}

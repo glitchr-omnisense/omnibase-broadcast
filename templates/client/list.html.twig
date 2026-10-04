@@ -1,0 +1,12 @@
+{# The covers, or the duets: the most seen first. key: covers | duets #}
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ (key ~ '.title')|trans }}{% endblock %}
+{% block content %}
+<div class="broadcast">
+    <header class="video-page-head"><div><h1>{{ (key ~ '.title')|trans }}</h1><p>{{ (key ~ '.lead')|trans }}</p></div></header>
+    {% if performances|length %}
+    <div class="video-grid">{% for performance in performances %}{% include '@Broadcast/client/_performance.html.twig' with {performance: performance} only %}{% endfor %}</div>
+    {% else %}<p class="video-empty">{{ (key ~ '.none')|trans }}</p>{% endif %}
+</div>
+{% endblock %}

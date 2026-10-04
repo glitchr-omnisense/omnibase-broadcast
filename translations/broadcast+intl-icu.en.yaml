@@ -1,0 +1,80 @@
+flag:
+    cover: 'Cover'
+    duet: 'Duet'
+card:
+    original: 'made famous by {artist}'
+info:
+    artists: '{count, plural, one {Artist} other {Artists}}'
+    song: 'Song'
+    episode: 'Episode'
+episodes:
+    title: 'The {year} episodes'
+    years: 'Years'
+    decade: '{decade}s'
+    none: 'No episode in {year}.'
+episode:
+    description: '{name} no. {number}, with {artists}.'
+    full: 'The whole show'
+    order: 'Running order'
+    interviews: 'Interviews'
+    bonus: 'Bonus and backstage'
+artists:
+    title: 'The artists'
+    none: 'No artist yet.'
+artist:
+    description: '{name} on stage: {count, plural, one {# live} other {# lives}}.'
+    kicker: '{count, plural, =0 {On stage} one {# live on stage} other {# lives on stage}}'
+    lives: 'Lives'
+    others: 'Interviews and bonus'
+song:
+    description: '"{title}" on stage: {count, plural, one {# version} other {# versions}}.'
+    kicker: '{count, plural, one {# version on stage} other {# versions on stage}}'
+songs:
+    title: 'Songs played again'
+    lead: 'One title, several nights, several voices.'
+    none: 'No song has been played twice yet.'
+covers:
+    title: 'Covers'
+    lead: 'When an artist sings somebody else''s song.'
+    none: 'No cover yet.'
+duets:
+    title: 'Duets'
+    lead: 'Encounters that only exist on this stage.'
+    none: 'No duet yet.'
+admin:
+    widget:
+        unrecognised: '{count, plural, one {title not recognised} other {titles not recognised}}'
+        episodes: '{count, plural, one {episode} other {episodes}}'
+        none: 'Every title was understood.'
+    programme:
+        name: 'Name'
+        slug: 'Address'
+        description: 'About'
+        channel: 'Channel'
+    episode:
+        programme: 'Programme'
+        number: 'Number'
+        title: 'Title'
+        aired_at: 'Aired'
+        image: 'Picture (address)'
+        full: 'Whole show'
+        origin: 'Origin'
+    performance:
+        episode: 'Episode'
+        video: 'Video'
+        position: 'Order'
+        kind: 'Kind'
+        song: 'Song'
+        cover: 'Cover'
+        performers: 'Artists'
+        raw_title: 'Original title'
+        recognised: 'Title recognised'
+    song:
+        title: 'Title'
+        slug: 'Address'
+        original: 'Original artist'
+    profile:
+        performer: 'Artist'
+        slug: 'Address'
+        biography: 'Biography'
+        image: 'Picture (address)'

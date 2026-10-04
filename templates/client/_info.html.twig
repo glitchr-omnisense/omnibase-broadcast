@@ -1,0 +1,18 @@
+{# Under a film's title on its page: what it is - the song, its artists, the episode it comes from. video #}
+{% trans_default_domain 'broadcast' %}
+{% set performance = broadcast_performance(video) %}
+{% if performance %}
+{% set profiles = broadcast_profiles(performance.performers) %}
+<dl class="broadcast-info">
+    {% if performance.performers|length %}
+    <dt>{{ 'info.artists'|trans({count: performance.performers|length}) }}</dt>
+    <dd>{% for performer in performance.performers %}{% set profile = profiles[performer.id] ?? null %}{% if profile %}<a href="{{ path('broadcast_artist', {slug: profile.slug}) }}">{{ performer.name }}</a>{% else %}{{ performer.name }}{% endif %}{{ not loop.last ? ', ' }}{% endfor %}</dd>
+    {% endif %}
+    {% if performance.song %}
+    <dt>{{ 'info.song'|trans }}</dt>
+    <dd><a href="{{ path('broadcast_song', {slug: performance.song.slug}) }}">{{ performance.song.title }}</a>{% if performance.song.originalArtist %} <span class="broadcast-original">({{ performance.song.originalArtist }})</span>{% endif %}</dd>
+    {% endif %}
+    <dt>{{ 'info.episode'|trans }}</dt>
+    <dd><a href="{{ path('broadcast_episode', {number: performance.episode.number}) }}">{{ performance.episode.programme.name }} n°{{ performance.episode.number }}</a>{% if performance.episode.airedAt %}, {{ performance.episode.airedAt|format_date('long') }}{% endif %}</dd>
+</dl>
+{% endif %}

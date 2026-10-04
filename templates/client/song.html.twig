@@ -1,0 +1,17 @@
+{# A song: every version of it played on stage, the first one first. #}
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ song.title }}{% endblock %}
+{% block description %}{{ 'song.description'|trans({title: song.title, count: versions|length}) }}{% endblock %}
+{% block content %}
+<div class="broadcast broadcast-song">
+    <header class="video-page-head">
+        <div>
+            <p class="broadcast-kicker">{{ 'song.kicker'|trans({count: versions|length}) }}</p>
+            <h1>{{ song.title }}</h1>
+            {% if song.originalArtist %}<p class="broadcast-original">{{ 'card.original'|trans({artist: song.originalArtist}) }}</p>{% endif %}
+        </div>
+    </header>
+    <div class="video-grid">{% for performance in versions %}{% include '@Broadcast/client/_performance.html.twig' with {performance: performance, profiles: profiles} only %}{% endfor %}</div>
+</div>
+{% endblock %}

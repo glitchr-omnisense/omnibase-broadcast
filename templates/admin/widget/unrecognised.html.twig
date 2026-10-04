@@ -1,0 +1,19 @@
+{# The show's tile (Base\Broadcast\Admin\Widget\BroadcastWidgetType). #}
+{% trans_default_domain 'broadcast' %}
+{% set crud = 'Base\\Broadcast\\Controller\\Admin\\Crud\\PerformanceCrudController' %}
+<div class="analytics-card card broadcast-widget">
+    <div class="analytics-card-header"><h2 class="analytics-card-title">{{ widget.label|trans({}, 'admin') }}</h2></div>
+    <div class="broadcast-widget-body">
+        <p><a href="{{ admin_url(crud, 'index') }}?filters[recognised]=0"><b>{{ count }}</b> {{ 'admin.widget.unrecognised'|trans({count: count}) }}</a> · <b>{{ episodes }}</b> {{ 'admin.widget.episodes'|trans({count: episodes}) }}</p>
+        {% if unrecognised|length %}
+        <ul>{% for performance in unrecognised %}<li><a href="{{ admin_url(crud, 'edit', performance.id) }}">{{ performance.rawTitle }}</a></li>{% endfor %}</ul>
+        {% else %}<p class="broadcast-widget-none">{{ 'admin.widget.none'|trans }}</p>{% endif %}
+    </div>
+</div>
+<style>
+    .broadcast-widget-body { display: grid; gap: .5rem; padding: 0 1rem 1rem; font-size: .9rem; }
+    .broadcast-widget-body p { margin: 0; }
+    .broadcast-widget-body b { font-size: 1.2rem; }
+    .broadcast-widget-body ul { margin: 0; padding-left: 1.1rem; }
+    .broadcast-widget-none { opacity: .7; }
+</style>

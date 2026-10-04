@@ -1,0 +1,27 @@
+{#
+ # A performance as a card: the film's poster and length, then - when the
+ # title was understood - the song and who sings it; the raw title otherwise.
+ #   performance; profiles (performer id => Profile) for the artists' links; show_episode
+ #}
+{% trans_default_domain 'broadcast' %}
+{% set video = performance.video %}
+{% set link = path('video_watch', {slug: video.slug}) %}
+<article class="video-card broadcast-card">
+    <a class="video-card-poster" href="{{ link }}" tabindex="-1" aria-hidden="true">
+        {% if video.poster %}<img src="{{ video.poster }}" alt="" loading="lazy" decoding="async">{% else %}<span class="video-card-blank"></span>{% endif %}
+        {% if video.duration %}<span class="video-card-time">{{ video.duration|video_time }}</span>{% endif %}
+        {% if performance.cover %}<span class="broadcast-flag">{{ 'flag.cover'|trans }}</span>{% elseif performance.duet %}<span class="broadcast-flag">{{ 'flag.duet'|trans }}</span>{% endif %}
+    </a>
+    <div class="video-card-text">
+        {% if performance.song %}
+        <h3 class="video-card-title"><a href="{{ link }}">{{ performance.song.title }}</a></h3>
+        <p class="video-card-channel">
+            {% for performer in performance.performers %}{% set profile = (profiles ?? {})[performer.id] ?? null %}{% if profile %}<a href="{{ path('broadcast_artist', {slug: profile.slug}) }}">{{ performer.name }}</a>{% else %}{{ performer.name }}{% endif %}{{ not loop.last ? ' / ' }}{% endfor %}
+            {% if performance.cover and performance.song.originalArtist %}<span class="broadcast-original"> · {{ 'card.original'|trans({artist: performance.song.originalArtist}) }}</span>{% endif %}
+        </p>
+        {% else %}
+        <h3 class="video-card-title"><a href="{{ link }}">{{ video.title }}</a></h3>
+        {% endif %}
+        <p class="video-card-meta">{% if show_episode ?? true %}<a href="{{ path('broadcast_episode', {number: performance.episode.number}) }}">{{ performance.episode.airedAt ? performance.episode.airedAt|format_date('long') : 'n°' ~ performance.episode.number }}</a> · {% endif %}{{ '@video.card.views'|trans({count: video.totalViews, n: video.totalViews|video_count}) }}</p>
+    </div>
+</article>

@@ -1,0 +1,80 @@
+flag:
+    cover: 'Reprise'
+    duet: 'Duo'
+card:
+    original: 'popularisée par {artist}'
+info:
+    artists: '{count, plural, one {Artiste} other {Artistes}}'
+    song: 'Chanson'
+    episode: 'Émission'
+episodes:
+    title: 'Les émissions de {year}'
+    years: 'Années'
+    decade: 'Années {decade}'
+    none: 'Aucune émission en {year}.'
+episode:
+    description: '{name} n°{number}, avec {artists}.'
+    full: 'L’intégrale'
+    order: 'Ordre de passage'
+    interviews: 'Interviews'
+    bonus: 'Bonus et coulisses'
+artists:
+    title: 'Les artistes'
+    none: 'Aucun artiste pour l’instant.'
+artist:
+    description: '{name} sur le plateau : {count, plural, one {# live} other {# lives}}.'
+    kicker: '{count, plural, =0 {Sur le plateau} one {# live sur le plateau} other {# lives sur le plateau}}'
+    lives: 'Les lives'
+    others: 'Interviews et bonus'
+song:
+    description: '« {title} » sur le plateau : {count, plural, one {# version} other {# versions}}.'
+    kicker: '{count, plural, one {# version sur le plateau} other {# versions sur le plateau}}'
+songs:
+    title: 'Les chansons rejouées'
+    lead: 'Un même titre, plusieurs soirs, plusieurs voix.'
+    none: 'Aucune chanson n’a encore été jouée deux fois.'
+covers:
+    title: 'Les reprises'
+    lead: 'Quand un artiste chante la chanson d’un autre.'
+    none: 'Aucune reprise pour l’instant.'
+duets:
+    title: 'Les duos'
+    lead: 'Des rencontres qui n’existent que sur ce plateau.'
+    none: 'Aucun duo pour l’instant.'
+admin:
+    widget:
+        unrecognised: '{count, plural, =0 {titre non reconnu} one {titre non reconnu} other {titres non reconnus}}'
+        episodes: '{count, plural, one {émission} other {émissions}}'
+        none: 'Tous les titres ont été compris.'
+    programme:
+        name: 'Nom'
+        slug: 'Adresse'
+        description: 'Présentation'
+        channel: 'Chaîne'
+    episode:
+        programme: 'Émission'
+        number: 'Numéro'
+        title: 'Titre'
+        aired_at: 'Diffusée le'
+        image: 'Image (adresse)'
+        full: 'Intégrale'
+        origin: 'Origine'
+    performance:
+        episode: 'Émission'
+        video: 'Vidéo'
+        position: 'Ordre'
+        kind: 'Nature'
+        song: 'Chanson'
+        cover: 'Reprise'
+        performers: 'Artistes'
+        raw_title: 'Titre d’origine'
+        recognised: 'Titre reconnu'
+    song:
+        title: 'Titre'
+        slug: 'Adresse'
+        original: 'Interprète d’origine'
+    profile:
+        performer: 'Artiste'
+        slug: 'Adresse'
+        biography: 'Biographie'
+        image: 'Image (adresse)'

@@ -1,0 +1,49 @@
+/*
+ * omnibase/broadcast - the show's pages, on omnibase/video's custom
+ * properties (--video-*): link it after video.css.
+ */
+.broadcast { max-width: var(--video-max, 1440px); margin: 0 auto; }
+.broadcast section { margin: 2rem 0; }
+.broadcast-kicker { margin: 0 0 .4rem; color: var(--video-soft); font-size: .85rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.broadcast-original { color: var(--video-soft); }
+.broadcast-flag { position: absolute; left: .4rem; top: .4rem; padding: .12rem .45rem; border-radius: .25rem; background: var(--video-accent); color: var(--video-on-accent); font: 700 .7rem/1.3 var(--video-font); letter-spacing: .04em; text-transform: uppercase; }
+.broadcast-card .video-card-meta a { color: inherit; }
+
+.broadcast-years { display: grid; gap: .5rem; margin: 0 0 1.5rem; }
+.broadcast-years p { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .5rem; margin: 0; }
+.broadcast-years b { min-width: 7.5rem; color: var(--video-soft); font-size: .85rem; }
+.broadcast-years a, .broadcast-letters a { padding: .2rem .55rem; border-radius: 999px; color: inherit; text-decoration: none; font-variant-numeric: tabular-nums; }
+.broadcast-years a:hover, .broadcast-letters a:hover { background: var(--video-surface); }
+.broadcast-years a[aria-current="page"] { background: var(--video-accent); color: var(--video-on-accent); font-weight: 700; }
+
+.broadcast-episode-head, .broadcast-artist-head { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.5rem); align-items: end; margin-bottom: 2rem; }
+.broadcast-artist-head { grid-template-columns: minmax(8rem, 16rem) minmax(0, 1fr); align-items: start; }
+.broadcast-artist-head:not(:has(img)) { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 760px) { .broadcast-episode-head, .broadcast-artist-head { grid-template-columns: minmax(0, 1fr); } }
+.broadcast-episode-picture { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: var(--video-radius); overflow: hidden; background: #000; }
+.broadcast-episode-picture img, .broadcast-artist-picture { width: 100%; height: 100%; object-fit: cover; }
+.broadcast-artist-picture { aspect-ratio: 1; border-radius: var(--video-radius); }
+.broadcast-play { position: absolute; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; background: var(--video-accent); color: var(--video-on-accent); font-weight: 700; }
+.broadcast-episode-head h1, .broadcast-artist-head h1 { margin: 0; font: 800 clamp(2rem, 6vw, 4.5rem)/.95 var(--video-font-display); }
+.broadcast-episode-head h1 span { color: var(--video-accent); white-space: nowrap; }
+.broadcast-guests { margin: 1rem 0 0; font-size: 1.05rem; line-height: 1.6; }
+.broadcast-guests a { color: inherit; }
+.broadcast-biography { max-width: 46rem; margin-top: 1rem; line-height: 1.6; color: var(--video-soft); }
+
+.broadcast-order { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: 1.4rem 1rem; margin: 0; padding: 0; list-style: none; counter-reset: passage; }
+.broadcast-order > li { position: relative; counter-increment: passage; }
+.broadcast-order > li::before { content: counter(passage); position: absolute; z-index: 1; right: .4rem; top: .4rem; min-width: 1.7rem; padding: .1rem .3rem; border-radius: .25rem; background: rgba(0, 0, 0, .78); color: #fff; font: 700 .8rem/1.4 var(--video-font); text-align: center; }
+
+.broadcast-letters { display: flex; flex-wrap: wrap; gap: .1rem; margin-bottom: 1.5rem; font-weight: 700; }
+.broadcast-letter { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--video-line); margin: 0 !important; }
+.broadcast-letter h2 { margin: 0; font: 800 2rem/1 var(--video-font-display); color: var(--video-accent); }
+.broadcast-letter ul, .broadcast-songs { columns: 14rem; column-gap: 2rem; margin: 0; padding: 0; list-style: none; }
+.broadcast-letter li, .broadcast-songs li { padding: .2rem 0; break-inside: avoid; }
+.broadcast-letter a, .broadcast-songs a { color: inherit; text-decoration: none; }
+.broadcast-letter a:hover, .broadcast-songs a:hover strong { text-decoration: underline; }
+.broadcast-songs a { display: grid; padding: .35rem 0; }
+.broadcast-songs small { color: var(--video-soft); }
+
+.broadcast-info { display: grid; grid-template-columns: auto 1fr; gap: .25rem .9rem; margin: .8rem 0 0; }
+.broadcast-info dt { color: var(--video-soft); }
+.broadcast-info dd { margin: 0; }

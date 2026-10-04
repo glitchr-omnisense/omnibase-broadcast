@@ -1,0 +1,13 @@
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ 'songs.title'|trans }}{% endblock %}
+{% block content %}
+<div class="broadcast">
+    <header class="video-page-head"><div><h1>{{ 'songs.title'|trans }}</h1><p>{{ 'songs.lead'|trans }}</p></div></header>
+    {% if songs|length %}
+    <ul class="broadcast-songs">
+        {% for row in songs %}<li><a href="{{ path('broadcast_song', {slug: row.song.slug}) }}"><strong>{{ row.song.title }}</strong>{% if row.song.originalArtist %} <span class="broadcast-original">{{ row.song.originalArtist }}</span>{% endif %}<small>{{ 'song.kicker'|trans({count: row.versions}) }}</small></a></li>{% endfor %}
+    </ul>
+    {% else %}<p class="video-empty">{{ 'songs.none'|trans }}</p>{% endif %}
+</div>
+{% endblock %}

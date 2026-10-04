@@ -1,0 +1,19 @@
+{# The episodes, a year at a time; the years by decade. #}
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ 'episodes.title'|trans({year: year}) }}{% endblock %}
+{% block content %}
+<div class="broadcast">
+    <header class="video-page-head"><h1>{{ 'episodes.title'|trans({year: year}) }}</h1></header>
+    <nav class="broadcast-years" aria-label="{{ 'episodes.years'|trans }}">
+        {% for decade, list in decades %}
+        <p><b>{{ 'episodes.decade'|trans({decade: decade}) }}</b>{% for y in list %}<a href="{{ path('broadcast_episodes', {annee: y}) }}" {{ y == year ? 'aria-current="page"' }}>{{ y }}</a>{% endfor %}</p>
+        {% endfor %}
+    </nav>
+    {% if episodes|length %}
+    <div class="video-grid">
+        {% for episode in episodes %}{% include '@Broadcast/client/_episode.html.twig' with {episode: episode} only %}{% endfor %}
+    </div>
+    {% else %}<p class="video-empty">{{ 'episodes.none'|trans({year: year}) }}</p>{% endif %}
+</div>
+{% endblock %}

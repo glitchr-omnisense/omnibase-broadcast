@@ -1,0 +1,30 @@
+{# An artist: their story, what they played on stage (the latest first), their interviews and bonus. #}
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ profile.name }}{% endblock %}
+{% block description %}{{ 'artist.description'|trans({name: profile.name, count: lives|length}) }}{% endblock %}
+{% block content %}
+<div class="broadcast broadcast-artist">
+    <header class="broadcast-artist-head">
+        {% if profile.image %}<img class="broadcast-artist-picture" src="{{ profile.image }}" alt="">{% endif %}
+        <div>
+            <p class="broadcast-kicker">{{ 'artist.kicker'|trans({count: lives|length}) }}</p>
+            <h1>{{ profile.name }}</h1>
+            {% if profile.biography %}<div class="broadcast-biography">{{ profile.biography|nl2br }}</div>{% endif %}
+        </div>
+    </header>
+    {% if lives|length %}
+    <section>
+        <h2 class="video-section-title">{{ 'artist.lives'|trans }}</h2>
+        <div class="video-grid">{% for performance in lives %}{% include '@Broadcast/client/_performance.html.twig' with {performance: performance} only %}{% endfor %}</div>
+    </section>
+    {% endif %}
+    {% if others|length %}
+    <section>
+        <h2 class="video-section-title">{{ 'artist.others'|trans }}</h2>
+        <div class="video-grid">{% for performance in others %}{% include '@Broadcast/client/_performance.html.twig' with {performance: performance} only %}{% endfor %}</div>
+    </section>
+    {% endif %}
+    {% block artist_extra %}{% endblock %}
+</div>
+{% endblock %}

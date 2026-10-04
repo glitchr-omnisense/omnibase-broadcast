@@ -1,0 +1,34 @@
+{# One episode: the whole show, then the order of passage, the interviews, the bonus. #}
+{% extends 'layout1.html.twig' %}
+{% trans_default_domain 'broadcast' %}
+{% block title %}{{ episode.programme.name }} n°{{ episode.number }}{% endblock %}
+{% block description %}{{ 'episode.description'|trans({name: episode.programme.name, number: episode.number, artists: episode.performers|map(p => p.name)|join(', ')}) }}{% endblock %}
+{% block content %}
+<div class="broadcast broadcast-episode">
+    <header class="broadcast-episode-head">
+        {% if episode.image %}<a class="broadcast-episode-picture" href="{{ episode.full ? path('video_watch', {slug: episode.full.slug}) : '#passage' }}"><img src="{{ episode.image }}" alt="">{% if episode.full %}<span class="broadcast-play"><i class="fa-solid fa-play" aria-hidden="true"></i> {{ 'episode.full'|trans }}{% if episode.full.duration %} · {{ episode.full.duration|video_time }}{% endif %}</span>{% endif %}</a>{% endif %}
+        <div>
+            <p class="broadcast-kicker">{{ episode.airedAt ? episode.airedAt|format_date('full') }}</p>
+            <h1>{{ episode.programme.name }} <span>n°{{ episode.number }}</span></h1>
+            <p class="broadcast-guests">{% for performer in episode.performers %}{% set profile = profiles[performer.id] ?? null %}{% if profile %}<a href="{{ path('broadcast_artist', {slug: profile.slug}) }}">{{ performer.name }}</a>{% else %}{{ performer.name }}{% endif %}{{ not loop.last ? ' · ' }}{% endfor %}</p>
+        </div>
+    </header>
+
+    {% if lives|length %}
+    <section id="passage">
+        <h2 class="video-section-title">{{ 'episode.order'|trans }}</h2>
+        <ol class="broadcast-order">
+            {% for performance in lives %}<li>{% include '@Broadcast/client/_performance.html.twig' with {performance: performance, profiles: profiles, show_episode: false} only %}</li>{% endfor %}
+        </ol>
+    </section>
+    {% endif %}
+    {% for key, list in {interviews: interviews, bonus: bonus} %}
+    {% if list|length %}
+    <section>
+        <h2 class="video-section-title">{{ ('episode.' ~ key)|trans }}</h2>
+        <div class="video-grid">{% for performance in list %}{% include '@Broadcast/client/_performance.html.twig' with {performance: performance, profiles: profiles, show_episode: false} only %}{% endfor %}</div>
+    </section>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
