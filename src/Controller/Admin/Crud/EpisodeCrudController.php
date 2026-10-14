@@ -23,7 +23,7 @@ class EpisodeCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->onlyOnIndex();
         yield IntegerField::new('number', '@broadcast.admin.episode.number')->setColumns(2);
-        yield DateField::new('airedAt', '@broadcast.admin.episode.aired_at')->setColumns(3);
+        yield DateField::new('airedAt', '@broadcast.admin.episode.aired_at')->setRequired(false)->setColumns(3);
         yield TextField::new('title', '@broadcast.admin.episode.title')->setColumns(7)->setRequired(false);
         yield AssociationField::new('programme', '@broadcast.admin.episode.programme')->setColumns(6)->hideOnIndex();
         yield TextField::new('image', '@broadcast.admin.episode.image')->setColumns(12)->hideOnIndex()->setRequired(false);
