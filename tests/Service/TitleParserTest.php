@@ -17,6 +17,7 @@ class TitleParserTest extends TestCase
         }
     }
 
+    /** @dataProvider titles */
     #[DataProvider('titles')]
     public function testARealTitleIsRead(array $case): void
     {
