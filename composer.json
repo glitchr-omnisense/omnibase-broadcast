@@ -3,7 +3,7 @@
     "description": "A broadcast's site on omnibase: a programme, its episodes, what was played on stage (performances), the songs and who sang them - on omnibase/video's films and omnibase/music's performers.",
     "type": "symfony-bundle",
     "license": "MIT",
-    "homepage": "https://github.com/glitchr-studio/omnibase-broadcast",
+    "homepage": "https://github.com/glitchr-omnisense/omnibase-broadcast",
     "authors": [
         {
             "name": "Marco Meyer",
@@ -11,14 +11,14 @@
         }
     ],
     "support": {
-        "source": "https://github.com/glitchr-studio/omnibase-broadcast",
-        "issues": "https://github.com/glitchr-studio/omnibase-broadcast/issues"
+        "source": "https://github.com/glitchr-omnisense/omnibase-broadcast",
+        "issues": "https://github.com/glitchr-omnisense/omnibase-broadcast/issues"
     },
     "require": {
         "php": "^8.2",
         "doctrine/orm": "^2.15|^3.0",
         "omnibridge/symfony": "1.x-dev",
-        "omniscient/omnibase": "3.0.*-dev || 4.0.*-dev",
+        "omnisense/omnibase": "3.0.*-dev || 4.0.*-dev",
         "omnibase/admin": "dev-main",
         "omnibase/music": "dev-main",
         "omnibase/video": "dev-main",

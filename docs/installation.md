@@ -5,7 +5,7 @@ order: 2
 
 # Installation
 
-omnibase/video is installed first (its [installation](https://github.com/glitchr-studio/omnibase-video/blob/main/docs/installation.md)).
+omnibase/video is installed first (its [installation](https://github.com/glitchr-omnisense/omnibase-video/blob/main/docs/installation.md)).
 
 ```bash
 composer require omnibase/broadcast:dev-main

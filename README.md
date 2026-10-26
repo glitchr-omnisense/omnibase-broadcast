@@ -1,14 +1,14 @@
 # Broadcast
 
-A broadcast's site on [omnibase](https://github.com/glitchr-studio/omnibase):
+A broadcast's site on [omnibase](https://github.com/glitchr-omnisense/omnibase):
 a programme, its episodes, and for each film of an episode what it is - a
 song played live (by whom, their own or a cover, a duet), an interview, the
 whole show, a bonus. Written for one music show, no more general than it
 needed.
 
-- The films are [omnibase/video](https://github.com/glitchr-studio/omnibase-video)'s
+- The films are [omnibase/video](https://github.com/glitchr-omnisense/omnibase-video)'s
   (`Video`, its player, comments, lists, suggestions).
-- The artists are [omnibase/music](https://github.com/glitchr-studio/omnibase-music)'s
+- The artists are [omnibase/music](https://github.com/glitchr-omnisense/omnibase-music)'s
   `Performer`; a `Profile` gives one a page (address, story, picture).
 - `Programme`, `Episode`, `Performance`, `Song` are this bundle's.
 - `TitleParser` reads a film's title - `Artiste A / Artiste B "Chanson"
