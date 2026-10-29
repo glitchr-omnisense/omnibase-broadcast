@@ -1,6 +1,6 @@
 ---
 title: Installation
-order: 2
+order: 10
 ---
 
 # Installation
@@ -52,3 +52,20 @@ video:
     remote: { hosts: [the-show.example] }
     suggest: { per_channel: 0 }      # one channel for the whole show
 ```
+
+## Requirements
+
+- PHP 8.2 or later;
+- doctrine/orm 2.15 or 3;
+- omnisense/omnibase 3.0 or 4.0, omnibridge/symfony 1.x, omnibase/admin;
+- omnibase/video and omnibase/music (and omnisong, omnibase/music's
+  dependency);
+- Symfony 7 or 8 (config, dependency-injection, http-kernel, twig-bundle).
+
+## Filling it
+
+The bundle has no importer: a site writes the one its source needs (the show
+the bundle was written for reads its channel's films and their sections),
+with `TitleParser` to read each title and `Catalogue` to find or make its
+artists and song ([Reading titles](titles.md)). The titles it cannot read are
+kept, marked not recognised, for the back office to complete.
