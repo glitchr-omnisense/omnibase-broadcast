@@ -2,6 +2,8 @@
 
 namespace Base\Broadcast\Controller\Client;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Base\Broadcast\Repository\ProgrammeRepository;
 use Base\Broadcast\Entity\Performance;
 use Base\Broadcast\Repository\EpisodeRepository;
 use Base\Broadcast\Repository\PerformanceRepository;
@@ -25,6 +27,8 @@ class BroadcastController extends AbstractController
         private readonly PerformanceRepository $performances,
         private readonly ProfileRepository $profiles,
         private readonly SongRepository $songs,
+        private readonly ?ProgrammeRepository $programmes = null,
+        #[Autowire('%broadcast.programme%')] private readonly ?string $programme = null,
     ) {
     }
 
@@ -45,7 +49,8 @@ class BroadcastController extends AbstractController
     #[Route('/emission/{number}', name: 'broadcast_episode', requirements: ['number' => '\d+'], methods: ['GET'])]
     public function episode(int $number): Response
     {
-        $episode = $this->episodes->findOneByNumber($number) ?? throw new NotFoundHttpException('No such episode.');
+        // The site's programme (broadcast.programme, else the first): an episode's number is unique within one programme only.
+        $episode = $this->episodes->findOneByNumber($number, $this->programmes?->findCurrent($this->programme)) ?? throw new NotFoundHttpException('No such episode.');
 
         return $this->render('@Broadcast/client/episode.html.twig', [
             'episode' => $episode,

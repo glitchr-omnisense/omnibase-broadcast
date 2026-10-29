@@ -15,9 +15,10 @@ class EpisodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Episode::class);
     }
 
-    public function findOneByNumber(int $number): ?Episode
+    /** The episode of that number in a programme: a number is unique within one programme only. Null: in any programme (the first found). */
+    public function findOneByNumber(int $number, ?\Base\Broadcast\Entity\Programme $programme = null): ?Episode
     {
-        return $this->findOneBy(['number' => $number]);
+        return $this->findOneBy(['number' => $number] + (null !== $programme ? ['programme' => $programme] : []));
     }
 
     /** @return list<Episode> the last aired first */

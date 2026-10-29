@@ -103,9 +103,7 @@ and not taken down.
 | `ProgrammeRepository` | `findCurrent(?string $slug)` | the programme of that slug, else the first one |
 | `ProfileRepository` | `findAllByName()`, `findFor($performers)` | every profile by name; performer id => profile |
 
-> [!WARNING]
-> Known defect: `EpisodeRepository::findOneByNumber()` looks the number up in
-> every programme, though it is unique only within one: with two programmes,
-> `/emission/{number}` shows whichever comes first. `broadcast.programme`,
-> which names the site's programme, is read by nothing in the bundle
-> (`ProgrammeRepository::findCurrent()` takes the slug from its caller).
+`EpisodeRepository::findOneByNumber($number, ?Programme $programme)` looks the number up in that
+programme (a number is unique within one programme only), in any programme without one.
+`/emission/{number}` looks it up in the site's programme: `broadcast.programme` (its slug), else
+the first, through `ProgrammeRepository::findCurrent()`.

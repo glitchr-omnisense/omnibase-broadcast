@@ -25,7 +25,7 @@ docker run --rm --network none \
 On this checkout, in the harness:
 
 ```text
-Tests: 36, Assertions: 262, Errors: 1.
+Tests: 37, Assertions: 265, Errors: 1.
 ```
 
 The error is `AffinityTest`'s: the harness has no omnibase/video, so
