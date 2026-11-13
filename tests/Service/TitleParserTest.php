@@ -53,8 +53,20 @@ class TitleParserTest extends TestCase
     public function testWithoutASectionTheTitleSaysTheKind(): void
     {
         self::assertSame(Performance::INTERVIEW, TitleParser::kind(null, 'Interview Santa (2024)'));
-        self::assertSame(Performance::BONUS, TitleParser::kind(null, 'Taratata Extra : Bobbie "Losing You" (2024)'));
+        self::assertSame(Performance::BONUS, TitleParser::kind(null, 'Live Session Extra : Bobbie "Losing You" (2024)'));
         self::assertSame(Performance::LIVE, TitleParser::kind(null, 'Santa "Recommence-Moi" (2024)'));
         self::assertSame(Performance::BONUS, TitleParser::kind('Backstage'));
+    }
+
+    public function testTheShowsNameIsAnyOneOrTwoWords(): void
+    {
+        self::assertSame(Performance::FULL, TitleParser::kind(null, 'Studio N°12 Avec A, B'));
+        self::assertSame(Performance::FULL, TitleParser::kind(null, 'Live Session N°584 Avec A, B'));
+        self::assertSame(Performance::BONUS, TitleParser::kind(null, 'Studio Extra : A "Song" (2024)'));
+        self::assertSame(Performance::LIVE, TitleParser::kind(null, 'A "N°5" (2024)'), 'a number in a song is no episode');
+
+        $parsed = (new TitleParser())->parse('Studio Extra : A / B "Song" (2024)');
+        self::assertSame(['A', 'B'], $parsed->artists);
+        self::assertSame('Song', $parsed->song);
     }
 }

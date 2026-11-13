@@ -32,18 +32,18 @@ title does not name them.
 | `A / B "Caravane (2025)` | a quote left open: closed before the brackets |
 | `Artist « Song » (2010)`, `“Song”` | any quotes |
 | `Interview A / B (2024)`, `Interview et portrait A (1993)` | an interview, its artists |
-| `Taratata Extra : Artist "Song" (2024)` | a bonus, with its song |
+| `Live Session Extra : Artist "Song" (2024)` | a bonus, with its song (the show's name, one or two words, then `Extra :`) |
 | `Artist au piano avec … (2024)` filed under Live | **not recognised**: no song in quotes - it keeps the artists it was filed under and is listed in the back office |
 
-The parser's tests run on the show's own titles (`tests/fixtures/titles.json`).
+The parser's tests run on a show's titles, its name made up (`tests/fixtures/titles.json`).
 
 ## The kind
 
 `TitleParser::kind($section, $title)` reads the section first: `Live` is a
 live, `Interview` an interview, `Intégrale` (or `Integrale`, `Full`) the whole
 show, any other section a bonus. Without a section, the title: one that opens
-with `Interview` is an interview, `Taratata N°` or `Intégrale` the whole show,
-`Taratata Extra`, `Teaser`, `Bande Annonce`, `Les coulisses` or `Répétitions`
+with `Interview` is an interview, the show's name and `N°` with a number (`Live Session N°584`) or `Intégrale` the whole show,
+the show's name and `Extra` (`Live Session Extra`), `Teaser`, `Bande Annonce`, `Les coulisses` or `Répétitions`
 a bonus, anything else a live. Only a live needs a song to be recognised.
 
 `TitleParser::artists('A / B')` splits a billing on ` / `, in the order

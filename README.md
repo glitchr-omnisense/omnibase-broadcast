@@ -22,8 +22,24 @@ needed.
   complete), songs, artists' pages, a dashboard tile.
 
 ```bash
-composer require omnibase/broadcast:dev-main
+composer require omnibase/broadcast
 ```
+
+Under Symfony it runs on the core's Symfony host: Composer brings `omnisense/omnibase` 5.1 and
+`omnibridge/symfony` with it; `config/bundles.php` registers the core's bundle before this one
+(see the core's README for the other bundles a site usually adds):
+
+```php
+// config/bundles.php
+Omnibridge\Symfony\Omnibase\BaseBundle::class => ['all' => true],
+Base\Admin\AdminBundle::class => ['all' => true],
+Base\Music\MusicBundle::class => ['all' => true],
+Base\Video\VideoBundle::class => ['all' => true],
+Base\Broadcast\BroadcastBundle::class => ['all' => true],
+```
+
+The routes, the configuration and a first programme are in
+[docs/installation.md](docs/installation.md); `/emission/{number}` then shows an episode.
 
 Documentation: [docs/](docs/index.md). Tests: `vendor/bin/phpunit`.
 

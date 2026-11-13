@@ -8,7 +8,7 @@ order: 10
 omnibase/video is installed first (its [installation](https://github.com/glitchr-omnisense/omnibase-video/blob/main/docs/installation.md)).
 
 ```bash
-composer require omnibase/broadcast:dev-main
+composer require omnibase/broadcast
 ```
 
 ```php
@@ -29,7 +29,7 @@ broadcast_controller:
 ```yaml
 # config/packages/broadcast.yaml
 broadcast:
-    programme: taratata   # the site's programme (its slug); null: the first one
+    programme: live-session   # the site's programme (its slug); null: the first one
     anniversary: 30       # "thirty years ago this week" looks that many years back
 ```
 
@@ -57,7 +57,8 @@ video:
 
 - PHP 8.2 or later;
 - doctrine/orm 2.15 or 3;
-- omnisense/omnibase 3.0, 4.0 or 5.0, omnibridge/symfony 1.x, omnibase/admin;
+- omnisense/omnibase 5.1 or later 5.x, omnibridge/symfony 1.1 or later, omnibase/admin 1.x,
+  doctrine/doctrine-bundle 2.13 or 3;
 - omnibase/video and omnibase/music (and omnisong, omnibase/music's
   dependency);
 - Symfony 7 or 8 (config, dependency-injection, http-kernel, twig-bundle).

@@ -12,7 +12,7 @@ use Base\Broadcast\Model\ParsedTitle;
  *
  * gives the artists in their billing order, the song, who made it known
  * (so: a cover, when they are not on stage), the year; two artists or more
- * are a duet. Also read: `Interview A / B (1993)`, `Taratata Extra : A
+ * are a duet. Also read: `Interview A / B (1993)`, `Live Session Extra : A
  * "Chanson" (2024)` (a bonus, with its song), a medley (`"Ta Main" / "Toi
  * + Moi"`), brackets inside a title (`"(Sittin' On) The Dock Of The Bay"`),
  * a note that is no artist (`(Inédit à la TV)`), a bracket left open
@@ -27,6 +27,12 @@ class TitleParser
 {
     /** Brackets that say something about the take, not who made the song known. */
     private const NOTE = '/^(in[ée]dit|version|acoustique|live|medley|extrait|remix|piano|bonus|en duo|avec )/iu';
+
+    /** The show's own name, as its titles start with it: one or two words ("Live Session N°12", "Live Session Extra : ..."). */
+    private const SHOW = '[^\s"\/:]+(?: [^\s"\/:]+)?';
+
+    /** A bonus with its song: "<show> Extra : Artist \"Song\"". */
+    private const EXTRA = '/^'.self::SHOW.'\s+Extra\s*:\s*/iu';
 
     /** @param list<string> $filedUnder the artists the film is filed under, when its title does not name them */
     public function parse(string $title, ?string $section = null, array $filedUnder = []): ParsedTitle
@@ -53,7 +59,7 @@ class TitleParser
             return new ParsedTitle($raw, $kind, $filedUnder, null, null, $year);
         }
 
-        $extra = (bool) preg_match('/^Taratata Extra\s*:\s*/iu', $text, $m);
+        $extra = (bool) preg_match(self::EXTRA, $text, $m);
         if ($extra) {
             $text = mb_substr($text, mb_strlen($m[0]));
         }
@@ -97,8 +103,8 @@ class TitleParser
             \in_array($section, ['intégrale', 'integrale', 'full'], true) => Performance::FULL,
             '' !== $section => Performance::BONUS,
             (bool) preg_match('/^Interview\b/iu', $title) => Performance::INTERVIEW,
-            (bool) preg_match('/^(Taratata N°|Int[ée]grale)/iu', $title) => Performance::FULL,
-            (bool) preg_match('/^(Taratata Extra|Teaser|Bande Annonce|Les coulisses|R[ée]p[ée]titions)/iu', $title) => Performance::BONUS,
+            (bool) preg_match('/^('.self::SHOW.'\s+N°\s*\d|Int[ée]grale)/iu', $title) => Performance::FULL,
+            (bool) preg_match('/^('.self::SHOW.'\s+Extra\b|Teaser|Bande Annonce|Les coulisses|R[ée]p[ée]titions)/iu', $title) => Performance::BONUS,
             default => Performance::LIVE,
         };
     }
