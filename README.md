@@ -31,7 +31,7 @@ Under Symfony it runs on the core's Symfony host: Composer brings `omnisense/omn
 
 ```php
 // config/bundles.php
-Omnibridge\Symfony\Omnibase\BaseBundle::class => ['all' => true],
+Base\BaseBundle::class => ['all' => true],
 Base\Admin\AdminBundle::class => ['all' => true],
 Base\Music\MusicBundle::class => ['all' => true],
 Base\Video\VideoBundle::class => ['all' => true],

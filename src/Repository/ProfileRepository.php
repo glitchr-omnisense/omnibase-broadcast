@@ -4,15 +4,19 @@ namespace Base\Broadcast\Repository;
 
 use Base\Broadcast\Entity\Profile;
 use Base\Music\Entity\Performer;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Base\Database\Repository\Finders;
+use Base\Database\Repository\ServiceEntityRepository;
 
-/** @extends ServiceEntityRepository<Profile> */
+/**
+ * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Profile|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Profile[]    findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+ */
 class ProfileRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(Finders $finders)
     {
-        parent::__construct($registry, Profile::class);
+        parent::__construct($finders, Profile::class);
     }
 
     public function findOneFor(Performer $performer): ?Profile
@@ -23,7 +27,8 @@ class ProfileRepository extends ServiceEntityRepository
     /** @return list<Profile> every artist, by name */
     public function findAllByName(): array
     {
-        return $this->createQueryBuilder('f')->innerJoin('f.performer', 'p')->addSelect('p')->orderBy('p.name', 'ASC')->getQuery()->getResult();
+        // The performer was fetch-joined; ordered by its name through the finder's join of it.
+        return $this->findBy([], ['performer.name' => 'ASC']);
     }
 
     /**

@@ -5,7 +5,8 @@ namespace Base\Broadcast\Service;
 use Base\Broadcast\Entity\Profile;
 use Base\Broadcast\Entity\Song;
 use Base\Music\Entity\Performer;
-use Doctrine\ORM\EntityManagerInterface;
+use Base\Database\Repository\Repositories;
+use Base\Contract\UnitOfWork;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
@@ -23,7 +24,7 @@ class Catalogue
     /** @var array<string, Song> */
     private array $songs = [];
 
-    public function __construct(private readonly EntityManagerInterface $entityManager)
+    public function __construct(private readonly UnitOfWork $unitOfWork, private readonly Repositories $repositories)
     {
     }
 
@@ -39,12 +40,12 @@ class Catalogue
         if (isset($this->profiles[$slug])) {
             return $this->profiles[$slug];
         }
-        $profile = $this->entityManager->getRepository(Profile::class)->findOneBy(['slug' => $slug]);
+        $profile = $this->repositories->of(Profile::class)->findOneBy(['slug' => $slug]);
         if (!$profile) {
             $performer = (new Performer())->setName($name);
             $profile = new Profile($performer, $slug);
-            $this->entityManager->persist($performer);
-            $this->entityManager->persist($profile);
+            $this->unitOfWork->persist($performer);
+            $this->unitOfWork->persist($profile);
         }
 
         return $this->profiles[$slug] = $profile;
@@ -58,7 +59,7 @@ class Catalogue
     public function song(string $title, ?string $originalArtist = null): Song
     {
         $base = self::slug($title);
-        $repository = $this->entityManager->getRepository(Song::class);
+        $repository = $this->repositories->of(Song::class);
         foreach ([$originalArtist ? $base.'-'.self::slug($originalArtist) : null, $base] as $slug) {
             if (null === $slug) {
                 continue;
@@ -74,12 +75,12 @@ class Catalogue
         }
         $slug = mb_substr(isset($this->songs[$base]) || $repository->findOneBy(['slug' => $base]) ? $base.'-'.self::slug((string) $originalArtist) : $base, 0, 190);
         $song = new Song($title, $originalArtist, $slug);
-        $this->entityManager->persist($song);
+        $this->unitOfWork->persist($song);
 
         return $this->songs[$slug] = $song;
     }
 
-    /** Forget what was remembered (after an EntityManager::clear()). */
+    /** Forget what was remembered (after the unit of work was cleared). */
     public function reset(): void
     {
         $this->profiles = $this->songs = [];

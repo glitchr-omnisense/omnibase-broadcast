@@ -7,7 +7,7 @@ use Base\Music\Entity\Performer;
 use Base\Video\Entity\Video;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Base\Mapping as ORM;
 
 /**
  * What one film of an episode is: a song played live (by whom, a cover or

@@ -2,7 +2,7 @@
 
 namespace Base\Broadcast\DependencyInjection;
 
-use Omnibridge\Symfony\Omnibase\Bundle\AbstractBaseConfiguration;
+use Base\Bundle\AbstractBaseConfiguration;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class BroadcastConfiguration extends AbstractBaseConfiguration

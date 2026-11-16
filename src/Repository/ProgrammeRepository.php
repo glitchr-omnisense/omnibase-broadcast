@@ -3,15 +3,19 @@
 namespace Base\Broadcast\Repository;
 
 use Base\Broadcast\Entity\Programme;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Base\Database\Repository\Finders;
+use Base\Database\Repository\ServiceEntityRepository;
 
-/** @extends ServiceEntityRepository<Programme> */
+/**
+ * @method Programme|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Programme|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method Programme[]    findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+ */
 class ProgrammeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(Finders $finders)
     {
-        parent::__construct($registry, Programme::class);
+        parent::__construct($finders, Programme::class);
     }
 
     /** The site's programme: the one named, or the first. */

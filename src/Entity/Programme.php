@@ -4,7 +4,7 @@ namespace Base\Broadcast\Entity;
 
 use Base\Broadcast\Repository\ProgrammeRepository;
 use Base\Video\Entity\Channel;
-use Doctrine\ORM\Mapping as ORM;
+use Base\Mapping as ORM;
 
 /** The show: its name, what it says of itself, the channel its films are on. */
 #[ORM\Entity(repositoryClass: ProgrammeRepository::class)]

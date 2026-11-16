@@ -6,7 +6,7 @@ use Base\Broadcast\Repository\EpisodeRepository;
 use Base\Video\Entity\Video;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Base\Mapping as ORM;
 
 /**
  * One broadcast of the programme: its number, the day it aired, its

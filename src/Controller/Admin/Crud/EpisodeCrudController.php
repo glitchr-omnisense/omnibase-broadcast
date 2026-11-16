@@ -37,8 +37,8 @@ class EpisodeCrudController extends AbstractCrudController
 
     public function createEntity(string $entityFqcn): object
     {
-        $programme = $this->entityManager->getRepository(Programme::class)->findOneBy([], ['id' => 'ASC']) ?? new Programme('Programme');
-        $last = $this->entityManager->getRepository(Episode::class)->findOneBy([], ['number' => 'DESC']);
+        $programme = $this->repositories->of(Programme::class)->findOneBy([], ['id' => 'ASC']) ?? new Programme('Programme');
+        $last = $this->repositories->of(Episode::class)->findOneBy([], ['number' => 'DESC']);
 
         return new Episode($programme, ($last?->getNumber() ?? 0) + 1);
     }

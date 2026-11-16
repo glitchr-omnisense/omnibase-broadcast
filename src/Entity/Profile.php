@@ -4,7 +4,7 @@ namespace Base\Broadcast\Entity;
 
 use Base\Broadcast\Repository\ProfileRepository;
 use Base\Music\Entity\Performer;
-use Doctrine\ORM\Mapping as ORM;
+use Base\Mapping as ORM;
 
 /**
  * An artist's page on the site. The artist is omnibase/music's Performer

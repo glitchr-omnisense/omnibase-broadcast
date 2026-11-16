@@ -3,7 +3,7 @@
 namespace Base\Broadcast\Entity;
 
 use Base\Broadcast\Repository\SongRepository;
-use Doctrine\ORM\Mapping as ORM;
+use Base\Mapping as ORM;
 
 /**
  * A song as it was played on stage, whoever played it: its title and, when
