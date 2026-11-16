@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - 1.0.0
+## 2.0.0
 
 omnibase/broadcast is a broadcast's site on omnisense/omnibase: a programme, its episodes, and for each film of an
 episode what it is - a song played live (by whom, a cover, a duet), an interview, the whole show, a bonus. It names only
